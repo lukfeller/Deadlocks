@@ -11,14 +11,34 @@ zugewiesene_ressourcen = np.array(zugewiesene_ressourcen)
 angeforderte_ressourcen = np.array(angeforderte_ressourcen)
 
 
-#schritt 1
-Work = R - A.sum(axis=0)
-Finish = np.array([False] * A.shape[0])
+#überprüfen ob matrixen richtige Form haben 
+num
 
+
+#schritt 1
+Work = gesamten_ressourcen - zugewiesene_ressourcen.sum(axis = 0)
+Finish = np.array([False] * num_process)
+
+
+#schritt 2 Index für i => finsih[i] = false    angeforderte_ressourcen[i] <= work 
 while True:
     found_process = False
-    for i in range (len(Finish)):
-        if not Finish[i] and np.all(C[i] <= Work):
+    for i in range (num_process):
+        if not Finish[i] and np.all(angeforderte_ressourcen[i] <= work):
+
+#schritt 3 falls so ein prozess gefunden wurde, diesen als beendet markieren 
+finish [i] = True   #seine ressourcen frei geben 
+
+work += zugewiesene_ressourcen[i]
+    found_process = True 
+            break
+
+#schritt 4 checken ob alle prozesse fertig sind 
+if np.all(finish):
+    return False #kein deadlock gefunden 
+else:
+    return True #deadlock gefunden
+
 
 
 
