@@ -59,6 +59,17 @@ C = [
     [4, 3, 1]  
 ]
 
+#Ausgabe der eingelesenen und berechneten Daten
+print("\nRessourcen (interaktiv eingegeben):")
+print(ressourcen)
+print("\nBelegungsmatrix (vom Simulator berechnet):")
+print(belegungsmatrix)
+print("\nAnforderungsmatrix (vom Simulator berechnet):")
+print(anforderungsmatrix)
+print("\nInitialer Ressourcenrestvektor (berechnet):")
+print(initialer_ressourcenrestvektor)
+
+
 if deadlock_erkennung(R, A, C): 
     print("Deadlock detected!")  
 else:  
