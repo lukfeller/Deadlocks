@@ -1,17 +1,15 @@
 # Deadlocks
 import numpy as np
 
-def deadlock_erkennung(R, A, C)
+def deadlock_erkennung(gesamten_ressourcen, zugewiesene_ressourcen, angeforderte_ressourcen)
 
 #Deadlock Erkennung mittels der Banker-Algoritmus
-# R = Ressourcenvektor 
-# B = Belegungsmatrix
-# A = Anforderungsmatrix
 
-R = np.array(R)
-B = np.array(B)
-A = np.array(A)
 #Zur einfacheren Handhabung in Numpy-Arrays konvertieren
+gesamten_ressourcen = np.array(gesamten_ressourcen)
+zugewiesene_ressourcen = np.array(zugewiesene_ressourcen)
+angeforderte_ressourcen = np.array(angeforderte_ressourcen)
+
 
 #schritt 1
 Work = R - A.sum(axis=0)
