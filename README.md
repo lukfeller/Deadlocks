@@ -13,8 +13,8 @@ def deadlock_erkennung(gesamten_ressourcen, zugewiesene_ressourcen, angeforderte
     num_resources = len(gesamten_ressourcen)  
 
     #Interaktive Eingabe des Ressourcenvektors
-    ressourcenvektor_input = input("Bitte geben Sie den Ressourcenvektor durch Leerzeichen getrennt ein: ")
-    ressourcenvektor = list(map(int, ressourcenvektor_input.split()))
+    ressourcen_input = input("Bitte geben Sie den Ressourcenvektor durch Leerzeichen getrennt ein: ")
+    ressourcen = list(map(int, ressourcen_input.split()))
     
     # Schritt 1: Berechnung des verfügbaren Work-Vektors 
     work = gesamten_ressourcen - zugewiesene_ressourcen.sum(axis=0)  
