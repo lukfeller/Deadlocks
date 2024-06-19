@@ -24,25 +24,6 @@ while True:
 
 
 
-
-
-
-
-
-
-
-if deadlock_erkennung(R, A, C)
-    print("Deadlock detected!")
-else 
-    print("No deadlock detected.")
-    
-
-
-
-
-
-
-
 #beispiel Daten für vektoren und Matrixen 
 R = [10, 5, 7]
 A = [
@@ -59,6 +40,11 @@ C = [
     [0, 1, 1]
     [4, 3, 1]
   ]
-  
+
+
+if deadlock_erkennung(R, A, C)
+    print("Deadlock detected!")
+else 
+    print("No deadlock detected.")
 
 
