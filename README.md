@@ -10,11 +10,7 @@ def deadlock_erkennung(gesamten_ressourcen, zugewiesene_ressourcen, angeforderte
 
     # Überprüfen ob die Matrizen die richtige Form haben
     num_process = len(zugewiesene_ressourcen)  
-    num_resources = len(gesamten_ressourcen)  
-
-    #Interaktive Eingabe des Ressourcenvektors
-    ressourcen_input = input("Bitte geben Sie den Ressourcenvektor durch Leerzeichen getrennt ein: ")
-    ressourcen = list(map(int, ressourcen_input.split()))
+    num_resources = len(gesamten_ressourcen)
     
     # Schritt 1: Berechnung des verfügbaren Work-Vektors 
     work = gesamten_ressourcen - zugewiesene_ressourcen.sum(axis=0)  
@@ -42,36 +38,47 @@ def deadlock_erkennung(gesamten_ressourcen, zugewiesene_ressourcen, angeforderte
     else:
         return True # Deadlock gefunden  
 
-# Beispiel Daten für Vektoren und Matrizen  
-R = [10, 5, 7]
-A = [
-    [0, 1, 0],
-    [2, 0, 0],
-    [3, 0, 2],
-    [2, 1, 1],
-    [0, 0, 2]
-]
-C = [
-    [7, 4, 3],  
-    [1, 2, 2],  
-    [6, 0, 0], 
-    [0, 1, 1],  
-    [4, 3, 1]  
-]
+# Funktion zur Eingabe einer Matrix
+def eingabe_matrix(prompt, num_process, num_resources):
+    print(prompt)
+    matrix = []
+    for i in range(num_process):
+        row = input(f"Zeile {i + 1} (durch Leerzeichen getrennte Werte): ")
+        matrix.append(list(map(int, row.split())))
+    return matrix
 
-#Ausgabe der eingelesenen und berechneten Daten
+# Funktion zur Eingabe eines Vektors
+def eingabe_vektor(prompt):
+    return list(map(int, input(prompt).split()))
+
+# Eingabe der Anzahl an Prozessen
+num_process  = int(input("Bitte geben sie die Anzahl der Prozesse an:"))
+num_resources  = int(input("Bitte geben sie die Anzahl der ressourcen an:"))
+
+# Eingabe des ressourcen-vektors
+gesamten_ressourcen = eingabe_vektor("Bitte geben sie den ressourcenvektor (durch leerzeichen getrennt) ein:")
+
+# Eingabe der Belegungsmatrix
+zugewiesene_ressourcen = eingabe_matrix("Bitte geben Sie die Belegungsmatrix ein:", num_process, num_resources)
+
+# Eingabe der Anforderungsmatrix
+angeforderte_ressourcen = eingabe_matrix("Bitte geben Sie die Anforderungsmatrix ein:", num_process, num_resources)
+
+# Berechnung des initialen Ressourcenrestvektors
+initialer_ressourcenrestvektor = np.array(gesamten_ressourcen) - np.array(zugewiesene_ressourcen).sum(axis=0)
+
+# Ausgabe der eingelesenen und berechneten Daten
 print("\nRessourcen (interaktiv eingegeben):")
-print(ressourcen)
+print(gesamten_ressourcen)
 print("\nBelegungsmatrix (vom Simulator berechnet):")
-print(belegungsmatrix)
+print(zugewiesene_ressourcen)
 print("\nAnforderungsmatrix (vom Simulator berechnet):")
-print(anforderungsmatrix)
+print(angeforderte_ressourcen)
 print("\nInitialer Ressourcenrestvektor (berechnet):")
 print(initialer_ressourcenrestvektor)
 
-
-if deadlock_erkennung(R, A, C): 
-    print("Deadlock detected!")  
+# Deadlock erkennung basierend auf eingebenen Daten 
+if deadlock_erkennung(gesamten_ressourcen, zugewiesene_ressourcen, angeforderte_ressourcen): 
+    print("Deadlock gefunden!")  
 else:  
-    print("No deadlock detected.")  
-
+    print("Kein Deadlock gefunden.")  
